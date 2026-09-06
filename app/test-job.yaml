@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: app-functional-tests
+spec:
+  backoffLimit: 0
+
+  template:
+    metadata:
+      labels:
+        app: app-functional-tests
+
+    spec:
+      restartPolicy: Never
+
+      containers:
+        - name: test-runner
+          image: test-runner:1.0
+          imagePullPolicy: Never

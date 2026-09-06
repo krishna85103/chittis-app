@@ -1,0 +1,121 @@
+# =========================================================
+# Flutter generated files
+# =========================================================
+
+mobile/build/
+mobile/.dart_tool/
+mobile/.flutter-plugins
+mobile/.flutter-plugins-dependencies
+
+# Flutter generated metadata
+mobile/.metadata
+
+# =========================================================
+# IDE files
+# =========================================================
+
+mobile/.idea/
+mobile/*.iml
+
+# =========================================================
+# Android generated/local files
+# =========================================================
+
+mobile/android/.gradle/
+mobile/android/local.properties
+
+# Android Studio installed locally
+mobile/android/android-studio/
+mobile/android/android-studio-quail3-patch1-linux.tar.gz
+
+# =========================================================
+# iOS generated files
+# =========================================================
+
+mobile/ios/Pods/
+mobile/ios/.symlinks/
+mobile/ios/Flutter/ephemeral/
+mobile/ios/Flutter/Generated.xcconfig
+mobile/ios/Flutter/flutter_export_environment.sh
+
+# Generated iOS plugin files
+mobile/ios/Runner/GeneratedPluginRegistrant.h
+mobile/ios/Runner/GeneratedPluginRegistrant.m
+
+# =========================================================
+# Linux generated files
+# =========================================================
+
+mobile/linux/flutter/ephemeral/
+
+# =========================================================
+# macOS generated files
+# =========================================================
+
+mobile/macos/Flutter/ephemeral/
+
+# =========================================================
+# Windows generated files
+# =========================================================
+
+mobile/windows/flutter/ephemeral/
+
+# =========================================================
+# Java / Maven generated files
+# =========================================================
+
+**/target/
+
+# Java IDE files
+**/.classpath
+**/.project
+**/.settings/
+
+# =========================================================
+# Python
+# =========================================================
+
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.venv/
+venv/
+env/
+
+# =========================================================
+# Logs
+# =========================================================
+
+*.log
+wget-log
+
+# =========================================================
+# Environment files
+# =========================================================
+
+.env
+.env.*
+!.env.example
+
+# =========================================================
+# Kubernetes secrets
+# =========================================================
+
+**/*secret*.yaml
+**/*secret*.yml
+
+# =========================================================
+# Large local installers
+# =========================================================
+
+*.tar.gz
+*.zip
+*.iso
+
+# =========================================================
+# OS files
+# =========================================================
+
+.DS_Store
+Thumbs.db

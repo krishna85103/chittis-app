@@ -1,0 +1,20 @@
+/.gradle/
+/captures/
+/local.properties
+
+# Android Studio / IDE
+*.iml
+.idea/
+
+# Native build output
+.cxx/
+/build/
+
+# Flutter-generated Android file
+GeneratedPluginRegistrant.java
+
+# Signing credentials
+# Never commit these.
+key.properties
+**/*.keystore
+**/*.jks

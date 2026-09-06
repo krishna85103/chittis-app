@@ -1,0 +1,2640 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    creationTimestamp: "2026-08-26T18:25:00Z"
+    generateName: ml-training-29796145-
+    labels:
+      batch.kubernetes.io/controller-uid: fdd11643-0309-480f-b17a-487084c5b53f
+      batch.kubernetes.io/job-name: ml-training-29796145
+      controller-uid: fdd11643-0309-480f-b17a-487084c5b53f
+      job-name: ml-training-29796145
+    name: ml-training-29796145-phpzr
+    namespace: default
+    ownerReferences:
+    - apiVersion: batch/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Job
+      name: ml-training-29796145
+      uid: fdd11643-0309-480f-b17a-487084c5b53f
+    resourceVersion: "98144"
+    uid: dc32ca91-16f4-4b2b-a602-4b4f961ebf9c
+  spec:
+    containers:
+    - command:
+      - python
+      - train.py
+      env:
+      - name: DATA_PATH
+        value: /shared/data.csv
+      - name: MODEL_PATH
+        value: /shared/model.pkl
+      image: ai-api:10.0
+      imagePullPolicy: IfNotPresent
+      name: trainer
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /shared
+        name: ml-storage
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-4xsjl
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: k3d-ai-lab-server-0
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Never
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: ml-storage
+      persistentVolumeClaim:
+        claimName: ml-storage
+    - name: kube-api-access-4xsjl
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-08-26T18:26:07Z"
+      status: "False"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-08-26T18:25:00Z"
+      reason: PodCompleted
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-08-26T18:26:06Z"
+      reason: PodCompleted
+      status: "False"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-08-26T18:26:06Z"
+      reason: PodCompleted
+      status: "False"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-08-26T18:25:00Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: containerd://2e1e4f1db0d02d6a1ce0643d69d9c0deb46074db081d2c79940230dc9b15850f
+      image: docker.io/library/ai-api:10.0
+      imageID: sha256:5d5be729918999f511915cc7c1185be6ace5a16474023a6b8e56f4bc2bd3f779
+      lastState: {}
+      name: trainer
+      ready: false
+      restartCount: 0
+      started: false
+      state:
+        terminated:
+          containerID: containerd://2e1e4f1db0d02d6a1ce0643d69d9c0deb46074db081d2c79940230dc9b15850f
+          exitCode: 0
+          finishedAt: "2026-08-26T18:26:05Z"
+          reason: Completed
+          startedAt: "2026-08-26T18:25:04Z"
+      volumeMounts:
+      - mountPath: /shared
+        name: ml-storage
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-4xsjl
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: 172.21.0.3
+    hostIPs:
+    - ip: 172.21.0.3
+    phase: Succeeded
+    podIP: 10.42.0.111
+    podIPs:
+    - ip: 10.42.0.111
+    qosClass: BestEffort
+    startTime: "2026-08-26T18:25:00Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    creationTimestamp: "2026-08-26T18:30:00Z"
+    generateName: ml-training-29796150-
+    labels:
+      batch.kubernetes.io/controller-uid: 74a0d6f6-3379-4dee-91cb-56554ed20129
+      batch.kubernetes.io/job-name: ml-training-29796150
+      controller-uid: 74a0d6f6-3379-4dee-91cb-56554ed20129
+      job-name: ml-training-29796150
+    name: ml-training-29796150-97g4p
+    namespace: default
+    ownerReferences:
+    - apiVersion: batch/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Job
+      name: ml-training-29796150
+      uid: 74a0d6f6-3379-4dee-91cb-56554ed20129
+    resourceVersion: "98253"
+    uid: f781936e-8426-435c-a1d3-4f28d31067bd
+  spec:
+    containers:
+    - command:
+      - python
+      - train.py
+      env:
+      - name: DATA_PATH
+        value: /shared/data.csv
+      - name: MODEL_PATH
+        value: /shared/model.pkl
+      image: ai-api:10.0
+      imagePullPolicy: IfNotPresent
+      name: trainer
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /shared
+        name: ml-storage
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-w4xjm
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: k3d-ai-lab-server-0
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Never
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: ml-storage
+      persistentVolumeClaim:
+        claimName: ml-storage
+    - name: kube-api-access-w4xjm
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-08-26T18:30:08Z"
+      status: "False"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-08-26T18:30:00Z"
+      reason: PodCompleted
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-08-26T18:30:06Z"
+      reason: PodCompleted
+      status: "False"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-08-26T18:30:06Z"
+      reason: PodCompleted
+      status: "False"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-08-26T18:30:00Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: containerd://913a443b6b0084ee78b8602140ad394ce8fc04025ad7f115c6c000c5fb057519
+      image: docker.io/library/ai-api:10.0
+      imageID: sha256:5d5be729918999f511915cc7c1185be6ace5a16474023a6b8e56f4bc2bd3f779
+      lastState: {}
+      name: trainer
+      ready: false
+      restartCount: 0
+      started: false
+      state:
+        terminated:
+          containerID: containerd://913a443b6b0084ee78b8602140ad394ce8fc04025ad7f115c6c000c5fb057519
+          exitCode: 0
+          finishedAt: "2026-08-26T18:30:05Z"
+          reason: Completed
+          startedAt: "2026-08-26T18:30:02Z"
+      volumeMounts:
+      - mountPath: /shared
+        name: ml-storage
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-w4xjm
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: 172.21.0.3
+    hostIPs:
+    - ip: 172.21.0.3
+    phase: Succeeded
+    podIP: 10.42.0.112
+    podIPs:
+    - ip: 10.42.0.112
+    qosClass: BestEffort
+    startTime: "2026-08-26T18:30:00Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    creationTimestamp: "2026-08-26T18:35:00Z"
+    generateName: ml-training-29796155-
+    labels:
+      batch.kubernetes.io/controller-uid: 951345ad-ae13-49d4-9c81-e94abd895048
+      batch.kubernetes.io/job-name: ml-training-29796155
+      controller-uid: 951345ad-ae13-49d4-9c81-e94abd895048
+      job-name: ml-training-29796155
+    name: ml-training-29796155-p6zln
+    namespace: default
+    ownerReferences:
+    - apiVersion: batch/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Job
+      name: ml-training-29796155
+      uid: 951345ad-ae13-49d4-9c81-e94abd895048
+    resourceVersion: "98374"
+    uid: 4b1b2470-e7a0-4678-b5d9-f625c2e90b7b
+  spec:
+    containers:
+    - command:
+      - python
+      - train.py
+      env:
+      - name: DATA_PATH
+        value: /shared/data.csv
+      - name: MODEL_PATH
+        value: /shared/model.pkl
+      image: ai-api:10.0
+      imagePullPolicy: IfNotPresent
+      name: trainer
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /shared
+        name: ml-storage
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-bngrg
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: k3d-ai-lab-server-0
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Never
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: ml-storage
+      persistentVolumeClaim:
+        claimName: ml-storage
+    - name: kube-api-access-bngrg
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-08-26T18:35:07Z"
+      status: "False"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-08-26T18:35:00Z"
+      reason: PodCompleted
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-08-26T18:35:06Z"
+      reason: PodCompleted
+      status: "False"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-08-26T18:35:06Z"
+      reason: PodCompleted
+      status: "False"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-08-26T18:35:00Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: containerd://a62134b23cc0fb56ebbf8a41d9cec2743f91c2e44a7c98830a363bafa4a499ae
+      image: docker.io/library/ai-api:10.0
+      imageID: sha256:5d5be729918999f511915cc7c1185be6ace5a16474023a6b8e56f4bc2bd3f779
+      lastState: {}
+      name: trainer
+      ready: false
+      restartCount: 0
+      started: false
+      state:
+        terminated:
+          containerID: containerd://a62134b23cc0fb56ebbf8a41d9cec2743f91c2e44a7c98830a363bafa4a499ae
+          exitCode: 0
+          finishedAt: "2026-08-26T18:35:05Z"
+          reason: Completed
+          startedAt: "2026-08-26T18:35:01Z"
+      volumeMounts:
+      - mountPath: /shared
+        name: ml-storage
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-bngrg
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: 172.21.0.3
+    hostIPs:
+    - ip: 172.21.0.3
+    phase: Succeeded
+    podIP: 10.42.0.113
+    podIPs:
+    - ip: 10.42.0.113
+    qosClass: BestEffort
+    startTime: "2026-08-26T18:35:00Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    creationTimestamp: "2026-08-25T19:21:12Z"
+    generateName: postgres-7dd49f5988-
+    labels:
+      app: postgres
+      pod-template-hash: 7dd49f5988
+    name: postgres-7dd49f5988-7j26c
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: postgres-7dd49f5988
+      uid: 79175b70-3f01-4e3f-b7c8-4049f3ee7e40
+    resourceVersion: "95442"
+    uid: 1e9a8dec-5628-460d-83a6-58c28d6b7641
+  spec:
+    containers:
+    - env:
+      - name: POSTGRES_USER
+        valueFrom:
+          secretKeyRef:
+            key: POSTGRES_USER
+            name: postgres-secret
+      - name: POSTGRES_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            key: POSTGRES_PASSWORD
+            name: postgres-secret
+      - name: POSTGRES_DB
+        valueFrom:
+          secretKeyRef:
+            key: POSTGRES_DB
+            name: postgres-secret
+      image: postgres:16-alpine
+      imagePullPolicy: IfNotPresent
+      name: postgres
+      ports:
+      - containerPort: 5432
+        name: postgres
+        protocol: TCP
+      readinessProbe:
+        exec:
+          command:
+          - sh
+          - -c
+          - pg_isready -U "$POSTGRES_USER" -d "$POSTGRES_DB"
+        failureThreshold: 3
+        periodSeconds: 5
+        successThreshold: 1
+        timeoutSeconds: 3
+      resources: {}
+      startupProbe:
+        exec:
+          command:
+          - sh
+          - -c
+          - pg_isready -U "$POSTGRES_USER" -d "$POSTGRES_DB"
+        failureThreshold: 30
+        periodSeconds: 5
+        successThreshold: 1
+        timeoutSeconds: 3
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/lib/postgresql/data
+        name: postgres-data
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-8q5lw
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: k3d-ai-lab-server-0
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: postgres-data
+      persistentVolumeClaim:
+        claimName: postgres-pvc
+    - name: kube-api-access-8q5lw
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-08-26T16:45:58Z"
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-08-26T16:45:38Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-08-26T16:46:08Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-08-26T16:46:08Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-08-26T16:45:32Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: containerd://af37e1c38c60db3e7a46f95f710fefaf934818d892e8f8a10092fb900b2aafad
+      image: docker.io/library/postgres:16-alpine
+      imageID: docker.io/library/postgres@sha256:cf78e76683b9ca8c5733cbbdce6c9262b45b6767934dd0a95e671f9a0fc20685
+      lastState: {}
+      name: postgres
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2026-08-26T16:45:57Z"
+      volumeMounts:
+      - mountPath: /var/lib/postgresql/data
+        name: postgres-data
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-8q5lw
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: 172.21.0.3
+    hostIPs:
+    - ip: 172.21.0.3
+    phase: Running
+    podIP: 10.42.0.89
+    podIPs:
+    - ip: 10.42.0.89
+    qosClass: BestEffort
+    startTime: "2026-08-26T16:45:38Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    creationTimestamp: "2026-08-25T19:21:12Z"
+    generateName: test-app-544976547d-
+    labels:
+      app: test-app
+      pod-template-hash: 544976547d
+    name: test-app-544976547d-8gxzg
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: test-app-544976547d
+      uid: 883278d2-eac4-47b6-a79c-5f6c80107731
+    resourceVersion: "95398"
+    uid: d8cffc05-7dd8-4525-8443-476ba0f2ccc5
+  spec:
+    containers:
+    - image: test-app:1.0
+      imagePullPolicy: Never
+      name: test-app
+      ports:
+      - containerPort: 8080
+        protocol: TCP
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-rf4pl
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: k3d-ai-lab-server-0
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: kube-api-access-rf4pl
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-08-26T16:45:59Z"
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-08-26T16:45:38Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-08-26T16:45:59Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-08-26T16:45:59Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-08-26T16:45:32Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: containerd://d4d8c296d1e5ff223a0a99494f3919c28b12d5f9cb671eecbc6237a26473188b
+      image: docker.io/library/test-app:1.0
+      imageID: sha256:c4d4421761ad99ccefd08c527c1da949f76f3970107b94fbf7b880a3f548a0e6
+      lastState: {}
+      name: test-app
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2026-08-26T16:45:59Z"
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-rf4pl
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: 172.21.0.3
+    hostIPs:
+    - ip: 172.21.0.3
+    phase: Running
+    podIP: 10.42.0.81
+    podIPs:
+    - ip: 10.42.0.81
+    qosClass: BestEffort
+    startTime: "2026-08-26T16:45:38Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/restartedAt: "2026-08-26T22:55:43+05:30"
+    creationTimestamp: "2026-08-26T17:46:36Z"
+    generateName: testmobile-backend-65446955b9-
+    labels:
+      app: testmobile-backend
+      pod-template-hash: 65446955b9
+    name: testmobile-backend-65446955b9-pbs68
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: testmobile-backend-65446955b9
+      uid: 0605e2a6-c720-42b9-9657-43b3dfb33212
+    resourceVersion: "97135"
+    uid: d4c42c4e-bfe6-4c78-89cf-d88f46a51825
+  spec:
+    containers:
+    - env:
+      - name: SPRING_DATASOURCE_URL
+        value: jdbc:postgresql://postgres:5432/testdb
+      - name: SPRING_DATASOURCE_USERNAME
+        valueFrom:
+          secretKeyRef:
+            key: POSTGRES_USER
+            name: postgres-secret
+      - name: SPRING_DATASOURCE_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            key: POSTGRES_PASSWORD
+            name: postgres-secret
+      image: testmobile-backend:1.1
+      imagePullPolicy: Never
+      livenessProbe:
+        failureThreshold: 3
+        initialDelaySeconds: 30
+        periodSeconds: 10
+        successThreshold: 1
+        tcpSocket:
+          port: 8081
+        timeoutSeconds: 3
+      name: testmobile-backend
+      ports:
+      - containerPort: 8081
+        name: http
+        protocol: TCP
+      readinessProbe:
+        failureThreshold: 6
+        initialDelaySeconds: 10
+        periodSeconds: 5
+        successThreshold: 1
+        tcpSocket:
+          port: 8081
+        timeoutSeconds: 3
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-g72xr
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    initContainers:
+    - command:
+      - sh
+      - -c
+      - |
+        echo "Waiting for PostgreSQL..."
+        until pg_isready -h postgres -p 5432 -U testuser -d testdb; do
+          echo "PostgreSQL is not ready - waiting..."
+          sleep 2
+        done
+        echo "PostgreSQL is ready!"
+      image: postgres:16-alpine
+      imagePullPolicy: IfNotPresent
+      name: wait-for-postgres
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-g72xr
+        readOnly: true
+    nodeName: k3d-ai-lab-server-0
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: kube-api-access-g72xr
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-08-26T17:46:38Z"
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-08-26T17:46:39Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-08-26T17:46:56Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-08-26T17:46:56Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-08-26T17:46:36Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: containerd://f8e48c5550586546b8ede2730eee058a95357d00ae8119541932af11b3a3e182
+      image: docker.io/library/testmobile-backend:1.1
+      imageID: sha256:3381661ca8663fbf02973d458016b9eed6b83dfced5f2cbffe8d80420eaab8c5
+      lastState: {}
+      name: testmobile-backend
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2026-08-26T17:46:40Z"
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-g72xr
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: 172.21.0.3
+    hostIPs:
+    - ip: 172.21.0.3
+    initContainerStatuses:
+    - containerID: containerd://c799c33fe837b465654a9cf3b842ca9ef4c0384d9948b31410d508e89833d441
+      image: docker.io/library/postgres:16-alpine
+      imageID: docker.io/library/postgres@sha256:cf78e76683b9ca8c5733cbbdce6c9262b45b6767934dd0a95e671f9a0fc20685
+      lastState: {}
+      name: wait-for-postgres
+      ready: true
+      restartCount: 0
+      started: false
+      state:
+        terminated:
+          containerID: containerd://c799c33fe837b465654a9cf3b842ca9ef4c0384d9948b31410d508e89833d441
+          exitCode: 0
+          finishedAt: "2026-08-26T17:46:38Z"
+          reason: Completed
+          startedAt: "2026-08-26T17:46:38Z"
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-g72xr
+        readOnly: true
+        recursiveReadOnly: Disabled
+    phase: Running
+    podIP: 10.42.0.103
+    podIPs:
+    - ip: 10.42.0.103
+    qosClass: BestEffort
+    startTime: "2026-08-26T17:46:36Z"
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: "2026-02-12T07:43:43Z"
+    labels:
+      component: apiserver
+      provider: kubernetes
+    name: kubernetes
+    namespace: default
+    resourceVersion: "196"
+    uid: 2394e783-b46a-491e-8930-156b1e47f677
+  spec:
+    clusterIP: 10.43.0.1
+    clusterIPs:
+    - 10.43.0.1
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: https
+      port: 443
+      protocol: TCP
+      targetPort: 6443
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"postgres","namespace":"default"},"spec":{"ports":[{"name":"postgres","port":5432,"protocol":"TCP","targetPort":5432}],"selector":{"app":"postgres"}}}
+    creationTimestamp: "2026-08-23T14:52:10Z"
+    name: postgres
+    namespace: default
+    resourceVersion: "92573"
+    uid: 50e58220-5d4d-47e8-b078-44ce7cd94310
+  spec:
+    clusterIP: 10.43.222.74
+    clusterIPs:
+    - 10.43.222.74
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: postgres
+      port: 5432
+      protocol: TCP
+      targetPort: 5432
+    selector:
+      app: postgres
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"test-app","namespace":"default"},"spec":{"ports":[{"nodePort":30080,"port":8080,"targetPort":8080}],"selector":{"app":"test-app"},"type":"NodePort"}}
+    creationTimestamp: "2026-08-23T14:08:19Z"
+    name: test-app
+    namespace: default
+    resourceVersion: "70049"
+    uid: f1335a9c-c399-4d4c-88f2-6f934559d14b
+  spec:
+    clusterIP: 10.43.199.106
+    clusterIPs:
+    - 10.43.199.106
+    externalTrafficPolicy: Cluster
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - nodePort: 30080
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      app: test-app
+    sessionAffinity: None
+    type: NodePort
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"testmobile-backend","namespace":"default"},"spec":{"ports":[{"nodePort":30081,"port":8081,"protocol":"TCP","targetPort":8081}],"selector":{"app":"testmobile-backend"},"type":"NodePort"}}
+    creationTimestamp: "2026-08-23T19:52:07Z"
+    name: testmobile-backend
+    namespace: default
+    resourceVersion: "77817"
+    uid: ceadd608-21b5-43ce-9b5b-8a1bbef10db1
+  spec:
+    clusterIP: 10.43.15.32
+    clusterIPs:
+    - 10.43.15.32
+    externalTrafficPolicy: Cluster
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - nodePort: 30081
+      port: 8081
+      protocol: TCP
+      targetPort: 8081
+    selector:
+      app: testmobile-backend
+    sessionAffinity: None
+    type: NodePort
+  status:
+    loadBalancer: {}
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "2"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"name":"postgres","namespace":"default"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"postgres"}},"template":{"metadata":{"labels":{"app":"postgres"}},"spec":{"containers":[{"env":[{"name":"POSTGRES_USER","valueFrom":{"secretKeyRef":{"key":"POSTGRES_USER","name":"postgres-secret"}}},{"name":"POSTGRES_PASSWORD","valueFrom":{"secretKeyRef":{"key":"POSTGRES_PASSWORD","name":"postgres-secret"}}},{"name":"POSTGRES_DB","valueFrom":{"secretKeyRef":{"key":"POSTGRES_DB","name":"postgres-secret"}}}],"image":"postgres:16-alpine","imagePullPolicy":"IfNotPresent","name":"postgres","ports":[{"containerPort":5432,"name":"postgres","protocol":"TCP"}],"readinessProbe":{"exec":{"command":["sh","-c","pg_isready -U \"$POSTGRES_USER\" -d \"$POSTGRES_DB\""]},"failureThreshold":3,"periodSeconds":5,"timeoutSeconds":3},"startupProbe":{"exec":{"command":["sh","-c","pg_isready -U \"$POSTGRES_USER\" -d \"$POSTGRES_DB\""]},"failureThreshold":30,"periodSeconds":5,"timeoutSeconds":3},"volumeMounts":[{"mountPath":"/var/lib/postgresql/data","name":"postgres-data"}]}],"volumes":[{"name":"postgres-data","persistentVolumeClaim":{"claimName":"postgres-pvc"}}]}}}}
+    creationTimestamp: "2026-08-23T14:52:10Z"
+    generation: 2
+    name: postgres
+    namespace: default
+    resourceVersion: "95446"
+    uid: 756ef91a-ac11-4c23-bd21-3a101aa732c1
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: postgres
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: postgres
+      spec:
+        containers:
+        - env:
+          - name: POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                key: POSTGRES_USER
+                name: postgres-secret
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: POSTGRES_PASSWORD
+                name: postgres-secret
+          - name: POSTGRES_DB
+            valueFrom:
+              secretKeyRef:
+                key: POSTGRES_DB
+                name: postgres-secret
+          image: postgres:16-alpine
+          imagePullPolicy: IfNotPresent
+          name: postgres
+          ports:
+          - containerPort: 5432
+            name: postgres
+            protocol: TCP
+          readinessProbe:
+            exec:
+              command:
+              - sh
+              - -c
+              - pg_isready -U "$POSTGRES_USER" -d "$POSTGRES_DB"
+            failureThreshold: 3
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 3
+          resources: {}
+          startupProbe:
+            exec:
+              command:
+              - sh
+              - -c
+              - pg_isready -U "$POSTGRES_USER" -d "$POSTGRES_DB"
+            failureThreshold: 30
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 3
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /var/lib/postgresql/data
+            name: postgres-data
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - name: postgres-data
+          persistentVolumeClaim:
+            claimName: postgres-pvc
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-08-23T14:52:10Z"
+      lastUpdateTime: "2026-08-25T17:57:07Z"
+      message: ReplicaSet "postgres-7dd49f5988" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    - lastTransitionTime: "2026-08-26T16:46:08Z"
+      lastUpdateTime: "2026-08-26T16:46:08Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    observedGeneration: 2
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"name":"test-app","namespace":"default"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"test-app"}},"template":{"metadata":{"labels":{"app":"test-app"}},"spec":{"containers":[{"image":"test-app:1.0","imagePullPolicy":"Never","name":"test-app","ports":[{"containerPort":8080}]}]}}}}
+    creationTimestamp: "2026-08-23T14:08:19Z"
+    generation: 1
+    name: test-app
+    namespace: default
+    resourceVersion: "95402"
+    uid: 5ae3e4a2-1733-4bf9-8a9d-5fa800a3a375
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: test-app
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: test-app
+      spec:
+        containers:
+        - image: test-app:1.0
+          imagePullPolicy: Never
+          name: test-app
+          ports:
+          - containerPort: 8080
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-08-23T14:08:20Z"
+      lastUpdateTime: "2026-08-23T14:08:21Z"
+      message: ReplicaSet "test-app-544976547d" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    - lastTransitionTime: "2026-08-26T16:45:59Z"
+      lastUpdateTime: "2026-08-26T16:45:59Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "14"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"name":"testmobile-backend","namespace":"default"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"testmobile-backend"}},"template":{"metadata":{"labels":{"app":"testmobile-backend"}},"spec":{"containers":[{"env":[{"name":"SPRING_DATASOURCE_URL","value":"jdbc:postgresql://postgres:5432/testdb"},{"name":"SPRING_DATASOURCE_USERNAME","valueFrom":{"secretKeyRef":{"key":"POSTGRES_USER","name":"postgres-secret"}}},{"name":"SPRING_DATASOURCE_PASSWORD","valueFrom":{"secretKeyRef":{"key":"POSTGRES_PASSWORD","name":"postgres-secret"}}}],"image":"testmobile-backend:1.0","imagePullPolicy":"Never","livenessProbe":{"failureThreshold":3,"initialDelaySeconds":30,"periodSeconds":10,"tcpSocket":{"port":8081},"timeoutSeconds":3},"name":"testmobile-backend","ports":[{"containerPort":8081,"name":"http","protocol":"TCP"}],"readinessProbe":{"failureThreshold":6,"initialDelaySeconds":10,"periodSeconds":5,"tcpSocket":{"port":8081},"timeoutSeconds":3}}],"initContainers":[{"command":["sh","-c","echo \"Waiting for PostgreSQL...\"\nuntil pg_isready -h postgres -p 5432 -U testuser -d testdb; do\n  echo \"PostgreSQL is not ready - waiting...\"\n  sleep 2\ndone\necho \"PostgreSQL is ready!\"\n"],"image":"postgres:16-alpine","imagePullPolicy":"IfNotPresent","name":"wait-for-postgres"}]}}}}
+    creationTimestamp: "2026-08-23T19:50:09Z"
+    generation: 14
+    name: testmobile-backend
+    namespace: default
+    resourceVersion: "97149"
+    uid: b3881544-816a-44c3-b25f-df6c84e7b171
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: testmobile-backend
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/restartedAt: "2026-08-26T22:55:43+05:30"
+        creationTimestamp: null
+        labels:
+          app: testmobile-backend
+      spec:
+        containers:
+        - env:
+          - name: SPRING_DATASOURCE_URL
+            value: jdbc:postgresql://postgres:5432/testdb
+          - name: SPRING_DATASOURCE_USERNAME
+            valueFrom:
+              secretKeyRef:
+                key: POSTGRES_USER
+                name: postgres-secret
+          - name: SPRING_DATASOURCE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: POSTGRES_PASSWORD
+                name: postgres-secret
+          image: testmobile-backend:1.1
+          imagePullPolicy: Never
+          livenessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            tcpSocket:
+              port: 8081
+            timeoutSeconds: 3
+          name: testmobile-backend
+          ports:
+          - containerPort: 8081
+            name: http
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 6
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            successThreshold: 1
+            tcpSocket:
+              port: 8081
+            timeoutSeconds: 3
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        initContainers:
+        - command:
+          - sh
+          - -c
+          - |
+            echo "Waiting for PostgreSQL..."
+            until pg_isready -h postgres -p 5432 -U testuser -d testdb; do
+              echo "PostgreSQL is not ready - waiting..."
+              sleep 2
+            done
+            echo "PostgreSQL is ready!"
+          image: postgres:16-alpine
+          imagePullPolicy: IfNotPresent
+          name: wait-for-postgres
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-08-26T16:46:36Z"
+      lastUpdateTime: "2026-08-26T16:46:36Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2026-08-23T19:50:09Z"
+      lastUpdateTime: "2026-08-26T17:46:56Z"
+      message: ReplicaSet "testmobile-backend-65446955b9" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 14
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "2"
+    creationTimestamp: "2026-08-25T17:56:56Z"
+    generation: 1
+    labels:
+      app: postgres
+      pod-template-hash: 7dd49f5988
+    name: postgres-7dd49f5988
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: postgres
+      uid: 756ef91a-ac11-4c23-bd21-3a101aa732c1
+    resourceVersion: "95445"
+    uid: 79175b70-3f01-4e3f-b7c8-4049f3ee7e40
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: postgres
+        pod-template-hash: 7dd49f5988
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: postgres
+          pod-template-hash: 7dd49f5988
+      spec:
+        containers:
+        - env:
+          - name: POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                key: POSTGRES_USER
+                name: postgres-secret
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: POSTGRES_PASSWORD
+                name: postgres-secret
+          - name: POSTGRES_DB
+            valueFrom:
+              secretKeyRef:
+                key: POSTGRES_DB
+                name: postgres-secret
+          image: postgres:16-alpine
+          imagePullPolicy: IfNotPresent
+          name: postgres
+          ports:
+          - containerPort: 5432
+            name: postgres
+            protocol: TCP
+          readinessProbe:
+            exec:
+              command:
+              - sh
+              - -c
+              - pg_isready -U "$POSTGRES_USER" -d "$POSTGRES_DB"
+            failureThreshold: 3
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 3
+          resources: {}
+          startupProbe:
+            exec:
+              command:
+              - sh
+              - -c
+              - pg_isready -U "$POSTGRES_USER" -d "$POSTGRES_DB"
+            failureThreshold: 30
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 3
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /var/lib/postgresql/data
+            name: postgres-data
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - name: postgres-data
+          persistentVolumeClaim:
+            claimName: postgres-pvc
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: "2026-08-23T14:52:10Z"
+    generation: 2
+    labels:
+      app: postgres
+      pod-template-hash: 7f476557f9
+    name: postgres-7f476557f9
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: postgres
+      uid: 756ef91a-ac11-4c23-bd21-3a101aa732c1
+    resourceVersion: "92601"
+    uid: e6222ba2-57ee-4794-8687-567fe54ce4b4
+  spec:
+    replicas: 0
+    selector:
+      matchLabels:
+        app: postgres
+        pod-template-hash: 7f476557f9
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: postgres
+          pod-template-hash: 7f476557f9
+      spec:
+        containers:
+        - env:
+          - name: POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                key: POSTGRES_USER
+                name: postgres-secret
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: POSTGRES_PASSWORD
+                name: postgres-secret
+          - name: POSTGRES_DB
+            valueFrom:
+              secretKeyRef:
+                key: POSTGRES_DB
+                name: postgres-secret
+          image: postgres:16-alpine
+          imagePullPolicy: IfNotPresent
+          name: postgres
+          ports:
+          - containerPort: 5432
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /var/lib/postgresql/data
+            name: postgres-data
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - name: postgres-data
+          persistentVolumeClaim:
+            claimName: postgres-pvc
+  status:
+    observedGeneration: 2
+    replicas: 0
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: "2026-08-23T14:08:19Z"
+    generation: 1
+    labels:
+      app: test-app
+      pod-template-hash: 544976547d
+    name: test-app-544976547d
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: test-app
+      uid: 5ae3e4a2-1733-4bf9-8a9d-5fa800a3a375
+    resourceVersion: "95401"
+    uid: 883278d2-eac4-47b6-a79c-5f6c80107731
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: test-app
+        pod-template-hash: 544976547d
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: test-app
+          pod-template-hash: 544976547d
+      spec:
+        containers:
+        - image: test-app:1.0
+          imagePullPolicy: Never
+          name: test-app
+          ports:
+          - containerPort: 8080
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "10"
+    creationTimestamp: "2026-08-24T14:35:49Z"
+    generation: 2
+    labels:
+      app: testmobile-backend
+      pod-template-hash: "5658764494"
+    name: testmobile-backend-5658764494
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: testmobile-backend
+      uid: b3881544-816a-44c3-b25f-df6c84e7b171
+    resourceVersion: "92752"
+    uid: d3d3edd0-5302-4794-b2eb-ffc0054919aa
+  spec:
+    replicas: 0
+    selector:
+      matchLabels:
+        app: testmobile-backend
+        pod-template-hash: "5658764494"
+    template:
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/restartedAt: "2026-08-24T20:05:49+05:30"
+        creationTimestamp: null
+        labels:
+          app: testmobile-backend
+          pod-template-hash: "5658764494"
+      spec:
+        containers:
+        - image: testmobile-backend:1.0
+          imagePullPolicy: Never
+          name: testmobile-backend
+          ports:
+          - containerPort: 8081
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    observedGeneration: 2
+    replicas: 0
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "5"
+    creationTimestamp: "2026-08-24T13:36:32Z"
+    generation: 2
+    labels:
+      app: testmobile-backend
+      pod-template-hash: 5698c954b5
+    name: testmobile-backend-5698c954b5
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: testmobile-backend
+      uid: b3881544-816a-44c3-b25f-df6c84e7b171
+    resourceVersion: "87331"
+    uid: fcdfe296-3de1-4b86-93c3-ea536ca0f7d9
+  spec:
+    replicas: 0
+    selector:
+      matchLabels:
+        app: testmobile-backend
+        pod-template-hash: 5698c954b5
+    template:
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/restartedAt: "2026-08-24T19:06:32+05:30"
+        creationTimestamp: null
+        labels:
+          app: testmobile-backend
+          pod-template-hash: 5698c954b5
+      spec:
+        containers:
+        - image: testmobile-backend:1.0
+          imagePullPolicy: Never
+          name: testmobile-backend
+          ports:
+          - containerPort: 8081
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    observedGeneration: 2
+    replicas: 0
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "14"
+    creationTimestamp: "2026-08-26T17:46:36Z"
+    generation: 1
+    labels:
+      app: testmobile-backend
+      pod-template-hash: 65446955b9
+    name: testmobile-backend-65446955b9
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: testmobile-backend
+      uid: b3881544-816a-44c3-b25f-df6c84e7b171
+    resourceVersion: "97138"
+    uid: 0605e2a6-c720-42b9-9657-43b3dfb33212
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: testmobile-backend
+        pod-template-hash: 65446955b9
+    template:
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/restartedAt: "2026-08-26T22:55:43+05:30"
+        creationTimestamp: null
+        labels:
+          app: testmobile-backend
+          pod-template-hash: 65446955b9
+      spec:
+        containers:
+        - env:
+          - name: SPRING_DATASOURCE_URL
+            value: jdbc:postgresql://postgres:5432/testdb
+          - name: SPRING_DATASOURCE_USERNAME
+            valueFrom:
+              secretKeyRef:
+                key: POSTGRES_USER
+                name: postgres-secret
+          - name: SPRING_DATASOURCE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: POSTGRES_PASSWORD
+                name: postgres-secret
+          image: testmobile-backend:1.1
+          imagePullPolicy: Never
+          livenessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            tcpSocket:
+              port: 8081
+            timeoutSeconds: 3
+          name: testmobile-backend
+          ports:
+          - containerPort: 8081
+            name: http
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 6
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            successThreshold: 1
+            tcpSocket:
+              port: 8081
+            timeoutSeconds: 3
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        initContainers:
+        - command:
+          - sh
+          - -c
+          - |
+            echo "Waiting for PostgreSQL..."
+            until pg_isready -h postgres -p 5432 -U testuser -d testdb; do
+              echo "PostgreSQL is not ready - waiting..."
+              sleep 2
+            done
+            echo "PostgreSQL is ready!"
+          image: postgres:16-alpine
+          imagePullPolicy: IfNotPresent
+          name: wait-for-postgres
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "4"
+      deployment.kubernetes.io/revision-history: "1"
+    creationTimestamp: "2026-08-23T19:50:09Z"
+    generation: 4
+    labels:
+      app: testmobile-backend
+      pod-template-hash: 6885b985b
+    name: testmobile-backend-6885b985b
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: testmobile-backend
+      uid: b3881544-816a-44c3-b25f-df6c84e7b171
+    resourceVersion: "86433"
+    uid: a6a518a6-9de2-45fe-8023-8fee398f186a
+  spec:
+    replicas: 0
+    selector:
+      matchLabels:
+        app: testmobile-backend
+        pod-template-hash: 6885b985b
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: testmobile-backend
+          pod-template-hash: 6885b985b
+      spec:
+        containers:
+        - image: testmobile-backend:1.0
+          imagePullPolicy: Never
+          name: testmobile-backend
+          ports:
+          - containerPort: 8081
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    observedGeneration: 4
+    replicas: 0
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "7"
+    creationTimestamp: "2026-08-24T14:20:41Z"
+    generation: 2
+    labels:
+      app: testmobile-backend
+      pod-template-hash: 695d845ffb
+    name: testmobile-backend-695d845ffb
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: testmobile-backend
+      uid: b3881544-816a-44c3-b25f-df6c84e7b171
+    resourceVersion: "87685"
+    uid: 51d7d4d4-738a-4201-a599-97cb574865df
+  spec:
+    replicas: 0
+    selector:
+      matchLabels:
+        app: testmobile-backend
+        pod-template-hash: 695d845ffb
+    template:
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/restartedAt: "2026-08-24T19:50:41+05:30"
+        creationTimestamp: null
+        labels:
+          app: testmobile-backend
+          pod-template-hash: 695d845ffb
+      spec:
+        containers:
+        - image: testmobile-backend:1.0
+          imagePullPolicy: Never
+          name: testmobile-backend
+          ports:
+          - containerPort: 8081
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    observedGeneration: 2
+    replicas: 0
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "9"
+    creationTimestamp: "2026-08-24T14:28:29Z"
+    generation: 2
+    labels:
+      app: testmobile-backend
+      pod-template-hash: 75579876f4
+    name: testmobile-backend-75579876f4
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: testmobile-backend
+      uid: b3881544-816a-44c3-b25f-df6c84e7b171
+    resourceVersion: "88136"
+    uid: 9d5d646f-1c45-4725-8089-cfcae346e2d0
+  spec:
+    replicas: 0
+    selector:
+      matchLabels:
+        app: testmobile-backend
+        pod-template-hash: 75579876f4
+    template:
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/restartedAt: "2026-08-24T19:58:29+05:30"
+        creationTimestamp: null
+        labels:
+          app: testmobile-backend
+          pod-template-hash: 75579876f4
+      spec:
+        containers:
+        - image: testmobile-backend:1.0
+          imagePullPolicy: Never
+          name: testmobile-backend
+          ports:
+          - containerPort: 8081
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    observedGeneration: 2
+    replicas: 0
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "8"
+    creationTimestamp: "2026-08-24T14:24:19Z"
+    generation: 2
+    labels:
+      app: testmobile-backend
+      pod-template-hash: 757547b5f5
+    name: testmobile-backend-757547b5f5
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: testmobile-backend
+      uid: b3881544-816a-44c3-b25f-df6c84e7b171
+    resourceVersion: "87826"
+    uid: 7301f0eb-919e-41a2-abb2-5b7cc3acd223
+  spec:
+    replicas: 0
+    selector:
+      matchLabels:
+        app: testmobile-backend
+        pod-template-hash: 757547b5f5
+    template:
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/restartedAt: "2026-08-24T19:54:19+05:30"
+        creationTimestamp: null
+        labels:
+          app: testmobile-backend
+          pod-template-hash: 757547b5f5
+      spec:
+        containers:
+        - image: testmobile-backend:1.0
+          imagePullPolicy: Never
+          name: testmobile-backend
+          ports:
+          - containerPort: 8081
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    observedGeneration: 2
+    replicas: 0
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "12"
+    creationTimestamp: "2026-08-25T18:04:05Z"
+    generation: 2
+    labels:
+      app: testmobile-backend
+      pod-template-hash: 7c779c78d5
+    name: testmobile-backend-7c779c78d5
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: testmobile-backend
+      uid: b3881544-816a-44c3-b25f-df6c84e7b171
+    resourceVersion: "96442"
+    uid: b894d2e5-5d4e-46c4-a98c-daaf62dd7d65
+  spec:
+    replicas: 0
+    selector:
+      matchLabels:
+        app: testmobile-backend
+        pod-template-hash: 7c779c78d5
+    template:
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/restartedAt: "2026-08-25T23:31:08+05:30"
+        creationTimestamp: null
+        labels:
+          app: testmobile-backend
+          pod-template-hash: 7c779c78d5
+      spec:
+        containers:
+        - env:
+          - name: SPRING_DATASOURCE_URL
+            value: jdbc:postgresql://postgres:5432/testdb
+          - name: SPRING_DATASOURCE_USERNAME
+            valueFrom:
+              secretKeyRef:
+                key: POSTGRES_USER
+                name: postgres-secret
+          - name: SPRING_DATASOURCE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: POSTGRES_PASSWORD
+                name: postgres-secret
+          image: testmobile-backend:1.0
+          imagePullPolicy: Never
+          livenessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            tcpSocket:
+              port: 8081
+            timeoutSeconds: 3
+          name: testmobile-backend
+          ports:
+          - containerPort: 8081
+            name: http
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 6
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            successThreshold: 1
+            tcpSocket:
+              port: 8081
+            timeoutSeconds: 3
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        initContainers:
+        - command:
+          - sh
+          - -c
+          - |
+            echo "Waiting for PostgreSQL..."
+            until pg_isready -h postgres -p 5432 -U testuser -d testdb; do
+              echo "PostgreSQL is not ready - waiting..."
+              sleep 2
+            done
+            echo "PostgreSQL is ready!"
+          image: postgres:16-alpine
+          imagePullPolicy: IfNotPresent
+          name: wait-for-postgres
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    observedGeneration: 2
+    replicas: 0
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "6"
+    creationTimestamp: "2026-08-24T14:12:23Z"
+    generation: 2
+    labels:
+      app: testmobile-backend
+      pod-template-hash: 86957dff95
+    name: testmobile-backend-86957dff95
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: testmobile-backend
+      uid: b3881544-816a-44c3-b25f-df6c84e7b171
+    resourceVersion: "87570"
+    uid: 2092b25b-473d-4e07-b22b-a93dc8b20a97
+  spec:
+    replicas: 0
+    selector:
+      matchLabels:
+        app: testmobile-backend
+        pod-template-hash: 86957dff95
+    template:
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/restartedAt: "2026-08-24T19:42:23+05:30"
+        creationTimestamp: null
+        labels:
+          app: testmobile-backend
+          pod-template-hash: 86957dff95
+      spec:
+        containers:
+        - image: testmobile-backend:1.0
+          imagePullPolicy: Never
+          name: testmobile-backend
+          ports:
+          - containerPort: 8081
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    observedGeneration: 2
+    replicas: 0
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "11"
+    creationTimestamp: "2026-08-25T18:01:08Z"
+    generation: 2
+    labels:
+      app: testmobile-backend
+      pod-template-hash: bd5c64d5b
+    name: testmobile-backend-bd5c64d5b
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: testmobile-backend
+      uid: b3881544-816a-44c3-b25f-df6c84e7b171
+    resourceVersion: "92850"
+    uid: 7a621b05-44b7-4dd3-8397-c6b2b4d66b79
+  spec:
+    replicas: 0
+    selector:
+      matchLabels:
+        app: testmobile-backend
+        pod-template-hash: bd5c64d5b
+    template:
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/restartedAt: "2026-08-25T23:31:08+05:30"
+        creationTimestamp: null
+        labels:
+          app: testmobile-backend
+          pod-template-hash: bd5c64d5b
+      spec:
+        containers:
+        - image: testmobile-backend:1.0
+          imagePullPolicy: Never
+          name: testmobile-backend
+          ports:
+          - containerPort: 8081
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    observedGeneration: 2
+    replicas: 0
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "13"
+    creationTimestamp: "2026-08-26T17:25:43Z"
+    generation: 2
+    labels:
+      app: testmobile-backend
+      pod-template-hash: fb55f6f88
+    name: testmobile-backend-fb55f6f88
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: testmobile-backend
+      uid: b3881544-816a-44c3-b25f-df6c84e7b171
+    resourceVersion: "97148"
+    uid: b6e348bd-48b0-4e2b-8f1e-9aa4d25a5f00
+  spec:
+    replicas: 0
+    selector:
+      matchLabels:
+        app: testmobile-backend
+        pod-template-hash: fb55f6f88
+    template:
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/restartedAt: "2026-08-26T22:55:43+05:30"
+        creationTimestamp: null
+        labels:
+          app: testmobile-backend
+          pod-template-hash: fb55f6f88
+      spec:
+        containers:
+        - env:
+          - name: SPRING_DATASOURCE_URL
+            value: jdbc:postgresql://postgres:5432/testdb
+          - name: SPRING_DATASOURCE_USERNAME
+            valueFrom:
+              secretKeyRef:
+                key: POSTGRES_USER
+                name: postgres-secret
+          - name: SPRING_DATASOURCE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: POSTGRES_PASSWORD
+                name: postgres-secret
+          image: testmobile-backend:1.0
+          imagePullPolicy: Never
+          livenessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            tcpSocket:
+              port: 8081
+            timeoutSeconds: 3
+          name: testmobile-backend
+          ports:
+          - containerPort: 8081
+            name: http
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 6
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            successThreshold: 1
+            tcpSocket:
+              port: 8081
+            timeoutSeconds: 3
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        initContainers:
+        - command:
+          - sh
+          - -c
+          - |
+            echo "Waiting for PostgreSQL..."
+            until pg_isready -h postgres -p 5432 -U testuser -d testdb; do
+              echo "PostgreSQL is not ready - waiting..."
+              sleep 2
+            done
+            echo "PostgreSQL is ready!"
+          image: postgres:16-alpine
+          imagePullPolicy: IfNotPresent
+          name: wait-for-postgres
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    observedGeneration: 2
+    replicas: 0
+- apiVersion: batch/v1
+  kind: CronJob
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"batch/v1","kind":"CronJob","metadata":{"annotations":{},"name":"ml-training","namespace":"default"},"spec":{"concurrencyPolicy":"Forbid","jobTemplate":{"spec":{"template":{"spec":{"containers":[{"command":["python","train.py"],"env":[{"name":"DATA_PATH","value":"/shared/data.csv"},{"name":"MODEL_PATH","value":"/shared/model.pkl"}],"image":"ai-api:10.0","imagePullPolicy":"IfNotPresent","name":"trainer","volumeMounts":[{"mountPath":"/shared","name":"ml-storage"}]}],"restartPolicy":"Never","volumes":[{"name":"ml-storage","persistentVolumeClaim":{"claimName":"ml-storage"}}]}}}},"schedule":"*/5 * * * *"}}
+    creationTimestamp: "2026-08-15T12:05:55Z"
+    generation: 2
+    name: ml-training
+    namespace: default
+    resourceVersion: "98378"
+    uid: f7501cc2-4908-4cbd-967f-053428dcab70
+  spec:
+    concurrencyPolicy: Forbid
+    failedJobsHistoryLimit: 1
+    jobTemplate:
+      metadata:
+        creationTimestamp: null
+      spec:
+        template:
+          metadata:
+            creationTimestamp: null
+          spec:
+            containers:
+            - command:
+              - python
+              - train.py
+              env:
+              - name: DATA_PATH
+                value: /shared/data.csv
+              - name: MODEL_PATH
+                value: /shared/model.pkl
+              image: ai-api:10.0
+              imagePullPolicy: IfNotPresent
+              name: trainer
+              resources: {}
+              terminationMessagePath: /dev/termination-log
+              terminationMessagePolicy: File
+              volumeMounts:
+              - mountPath: /shared
+                name: ml-storage
+            dnsPolicy: ClusterFirst
+            restartPolicy: Never
+            schedulerName: default-scheduler
+            securityContext: {}
+            terminationGracePeriodSeconds: 30
+            volumes:
+            - name: ml-storage
+              persistentVolumeClaim:
+                claimName: ml-storage
+    schedule: '*/5 * * * *'
+    successfulJobsHistoryLimit: 3
+    suspend: false
+  status:
+    lastScheduleTime: "2026-08-26T18:35:00Z"
+    lastSuccessfulTime: "2026-08-26T18:35:08Z"
+- apiVersion: batch/v1
+  kind: Job
+  metadata:
+    annotations:
+      batch.kubernetes.io/cronjob-scheduled-timestamp: "2026-08-26T18:25:00Z"
+    creationTimestamp: "2026-08-26T18:25:00Z"
+    generation: 1
+    labels:
+      batch.kubernetes.io/controller-uid: fdd11643-0309-480f-b17a-487084c5b53f
+      batch.kubernetes.io/job-name: ml-training-29796145
+      controller-uid: fdd11643-0309-480f-b17a-487084c5b53f
+      job-name: ml-training-29796145
+    name: ml-training-29796145
+    namespace: default
+    ownerReferences:
+    - apiVersion: batch/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: CronJob
+      name: ml-training
+      uid: f7501cc2-4908-4cbd-967f-053428dcab70
+    resourceVersion: "98145"
+    uid: fdd11643-0309-480f-b17a-487084c5b53f
+  spec:
+    backoffLimit: 6
+    completionMode: NonIndexed
+    completions: 1
+    manualSelector: false
+    parallelism: 1
+    podReplacementPolicy: TerminatingOrFailed
+    selector:
+      matchLabels:
+        batch.kubernetes.io/controller-uid: fdd11643-0309-480f-b17a-487084c5b53f
+    suspend: false
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          batch.kubernetes.io/controller-uid: fdd11643-0309-480f-b17a-487084c5b53f
+          batch.kubernetes.io/job-name: ml-training-29796145
+          controller-uid: fdd11643-0309-480f-b17a-487084c5b53f
+          job-name: ml-training-29796145
+      spec:
+        containers:
+        - command:
+          - python
+          - train.py
+          env:
+          - name: DATA_PATH
+            value: /shared/data.csv
+          - name: MODEL_PATH
+            value: /shared/model.pkl
+          image: ai-api:10.0
+          imagePullPolicy: IfNotPresent
+          name: trainer
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /shared
+            name: ml-storage
+        dnsPolicy: ClusterFirst
+        restartPolicy: Never
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - name: ml-storage
+          persistentVolumeClaim:
+            claimName: ml-storage
+  status:
+    completionTime: "2026-08-26T18:26:08Z"
+    conditions:
+    - lastProbeTime: "2026-08-26T18:26:08Z"
+      lastTransitionTime: "2026-08-26T18:26:08Z"
+      message: Reached expected number of succeeded pods
+      reason: CompletionsReached
+      status: "True"
+      type: SuccessCriteriaMet
+    - lastProbeTime: "2026-08-26T18:26:08Z"
+      lastTransitionTime: "2026-08-26T18:26:08Z"
+      message: Reached expected number of succeeded pods
+      reason: CompletionsReached
+      status: "True"
+      type: Complete
+    ready: 0
+    startTime: "2026-08-26T18:25:00Z"
+    succeeded: 1
+    terminating: 0
+    uncountedTerminatedPods: {}
+- apiVersion: batch/v1
+  kind: Job
+  metadata:
+    annotations:
+      batch.kubernetes.io/cronjob-scheduled-timestamp: "2026-08-26T18:30:00Z"
+    creationTimestamp: "2026-08-26T18:30:00Z"
+    generation: 1
+    labels:
+      batch.kubernetes.io/controller-uid: 74a0d6f6-3379-4dee-91cb-56554ed20129
+      batch.kubernetes.io/job-name: ml-training-29796150
+      controller-uid: 74a0d6f6-3379-4dee-91cb-56554ed20129
+      job-name: ml-training-29796150
+    name: ml-training-29796150
+    namespace: default
+    ownerReferences:
+    - apiVersion: batch/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: CronJob
+      name: ml-training
+      uid: f7501cc2-4908-4cbd-967f-053428dcab70
+    resourceVersion: "98254"
+    uid: 74a0d6f6-3379-4dee-91cb-56554ed20129
+  spec:
+    backoffLimit: 6
+    completionMode: NonIndexed
+    completions: 1
+    manualSelector: false
+    parallelism: 1
+    podReplacementPolicy: TerminatingOrFailed
+    selector:
+      matchLabels:
+        batch.kubernetes.io/controller-uid: 74a0d6f6-3379-4dee-91cb-56554ed20129
+    suspend: false
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          batch.kubernetes.io/controller-uid: 74a0d6f6-3379-4dee-91cb-56554ed20129
+          batch.kubernetes.io/job-name: ml-training-29796150
+          controller-uid: 74a0d6f6-3379-4dee-91cb-56554ed20129
+          job-name: ml-training-29796150
+      spec:
+        containers:
+        - command:
+          - python
+          - train.py
+          env:
+          - name: DATA_PATH
+            value: /shared/data.csv
+          - name: MODEL_PATH
+            value: /shared/model.pkl
+          image: ai-api:10.0
+          imagePullPolicy: IfNotPresent
+          name: trainer
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /shared
+            name: ml-storage
+        dnsPolicy: ClusterFirst
+        restartPolicy: Never
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - name: ml-storage
+          persistentVolumeClaim:
+            claimName: ml-storage
+  status:
+    completionTime: "2026-08-26T18:30:08Z"
+    conditions:
+    - lastProbeTime: "2026-08-26T18:30:08Z"
+      lastTransitionTime: "2026-08-26T18:30:08Z"
+      message: Reached expected number of succeeded pods
+      reason: CompletionsReached
+      status: "True"
+      type: SuccessCriteriaMet
+    - lastProbeTime: "2026-08-26T18:30:08Z"
+      lastTransitionTime: "2026-08-26T18:30:08Z"
+      message: Reached expected number of succeeded pods
+      reason: CompletionsReached
+      status: "True"
+      type: Complete
+    ready: 0
+    startTime: "2026-08-26T18:30:00Z"
+    succeeded: 1
+    terminating: 0
+    uncountedTerminatedPods: {}
+- apiVersion: batch/v1
+  kind: Job
+  metadata:
+    annotations:
+      batch.kubernetes.io/cronjob-scheduled-timestamp: "2026-08-26T18:35:00Z"
+    creationTimestamp: "2026-08-26T18:35:00Z"
+    generation: 1
+    labels:
+      batch.kubernetes.io/controller-uid: 951345ad-ae13-49d4-9c81-e94abd895048
+      batch.kubernetes.io/job-name: ml-training-29796155
+      controller-uid: 951345ad-ae13-49d4-9c81-e94abd895048
+      job-name: ml-training-29796155
+    name: ml-training-29796155
+    namespace: default
+    ownerReferences:
+    - apiVersion: batch/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: CronJob
+      name: ml-training
+      uid: f7501cc2-4908-4cbd-967f-053428dcab70
+    resourceVersion: "98375"
+    uid: 951345ad-ae13-49d4-9c81-e94abd895048
+  spec:
+    backoffLimit: 6
+    completionMode: NonIndexed
+    completions: 1
+    manualSelector: false
+    parallelism: 1
+    podReplacementPolicy: TerminatingOrFailed
+    selector:
+      matchLabels:
+        batch.kubernetes.io/controller-uid: 951345ad-ae13-49d4-9c81-e94abd895048
+    suspend: false
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          batch.kubernetes.io/controller-uid: 951345ad-ae13-49d4-9c81-e94abd895048
+          batch.kubernetes.io/job-name: ml-training-29796155
+          controller-uid: 951345ad-ae13-49d4-9c81-e94abd895048
+          job-name: ml-training-29796155
+      spec:
+        containers:
+        - command:
+          - python
+          - train.py
+          env:
+          - name: DATA_PATH
+            value: /shared/data.csv
+          - name: MODEL_PATH
+            value: /shared/model.pkl
+          image: ai-api:10.0
+          imagePullPolicy: IfNotPresent
+          name: trainer
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /shared
+            name: ml-storage
+        dnsPolicy: ClusterFirst
+        restartPolicy: Never
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - name: ml-storage
+          persistentVolumeClaim:
+            claimName: ml-storage
+  status:
+    completionTime: "2026-08-26T18:35:08Z"
+    conditions:
+    - lastProbeTime: "2026-08-26T18:35:08Z"
+      lastTransitionTime: "2026-08-26T18:35:08Z"
+      message: Reached expected number of succeeded pods
+      reason: CompletionsReached
+      status: "True"
+      type: SuccessCriteriaMet
+    - lastProbeTime: "2026-08-26T18:35:08Z"
+      lastTransitionTime: "2026-08-26T18:35:08Z"
+      message: Reached expected number of succeeded pods
+      reason: CompletionsReached
+      status: "True"
+      type: Complete
+    ready: 0
+    startTime: "2026-08-26T18:35:00Z"
+    succeeded: 1
+    terminating: 0
+    uncountedTerminatedPods: {}
+kind: List
+metadata:
+  resourceVersion: ""

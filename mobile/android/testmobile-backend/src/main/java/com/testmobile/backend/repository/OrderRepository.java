@@ -1,0 +1,26 @@
+package com.testmobile.backend.repository;
+
+import com.testmobile.backend.model.Order;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface OrderRepository
+extends JpaRepository<Order, Long> {
+
+// =========================================================
+// CUSTOMER ORDERS
+// =========================================================
+
+List<Order> findByEmailOrderByCreatedAtDesc(
+        String email
+);
+
+// =========================================================
+// ADMIN - ALL ORDERS
+// =========================================================
+
+List<Order> findAllByOrderByCreatedAtDesc();
+
+
+}

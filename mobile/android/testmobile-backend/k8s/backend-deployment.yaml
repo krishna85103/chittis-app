@@ -1,0 +1,155 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: backend-uploads-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 5Gi
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: testmobile-backend
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: testmobile-backend
+
+  template:
+    metadata:
+      labels:
+        app: testmobile-backend
+
+    spec:
+
+      # ---------------------------------------------------------
+      # Wait for PostgreSQL
+      # ---------------------------------------------------------
+      initContainers:
+
+        - name: wait-for-postgres
+          image: postgres:16-alpine
+          imagePullPolicy: IfNotPresent
+
+          command:
+            - sh
+            - -c
+            - |
+              echo "Waiting for PostgreSQL..."
+
+              until pg_isready \
+                -h postgres \
+                -p 5432 \
+                -U testuser \
+                -d testdb
+              do
+                echo "PostgreSQL is not ready - waiting..."
+                sleep 2
+              done
+
+              echo "PostgreSQL is ready!"
+
+        # -------------------------------------------------------
+        # Copy uploads from image into persistent storage
+        # -------------------------------------------------------
+        - name: initialize-uploads
+          image: testmobile-backend:16
+          imagePullPolicy: Never
+
+          command:
+            - sh
+            - -c
+            - |
+              echo "Initializing persistent uploads..."
+
+              mkdir -p /persistent/food
+
+              if [ -d /app/uploads/food ]; then
+                cp -a /app/uploads/food/. /persistent/food/ || true
+              fi
+
+              echo "Files in persistent storage:"
+              find /persistent/food \
+                -maxdepth 1 \
+                -type f \
+                -printf '%f\n' \
+                | sort || true
+
+              echo "Upload initialization complete."
+
+          volumeMounts:
+            - name: uploads
+              mountPath: /persistent
+
+      # ---------------------------------------------------------
+      # Backend
+      # ---------------------------------------------------------
+      containers:
+
+        - name: testmobile-backend
+          image: testmobile-backend:16
+          imagePullPolicy: Never
+
+          ports:
+            - name: http
+              containerPort: 8081
+              protocol: TCP
+
+          env:
+
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgres:5432/testdb
+
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_USER
+
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_PASSWORD
+
+          # -----------------------------------------------------
+          # Persistent uploads
+          # -----------------------------------------------------
+          volumeMounts:
+            - name: uploads
+              mountPath: /app/uploads
+
+          # -----------------------------------------------------
+          # Health checks
+          # -----------------------------------------------------
+          readinessProbe:
+            tcpSocket:
+              port: 8081
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 6
+
+          livenessProbe:
+            tcpSocket:
+              port: 8081
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 3
+
+      # ---------------------------------------------------------
+      # Volumes
+      # ---------------------------------------------------------
+      volumes:
+
+        - name: uploads
+          persistentVolumeClaim:
+            claimName: backend-uploads-pvc
